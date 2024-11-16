@@ -1,6 +1,6 @@
 # Setup
 
-- git clone git@github.com:bhvngt/effect-webworker-kysely.git
+- git clone `git@github.com:bhvngt/effect-webworker-kysely.git`
 - pnpm install
 - pnpm dev
 - open `http://localhost:5173`
