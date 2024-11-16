@@ -6,22 +6,13 @@ import { Console, Context, Effect, Layer } from "effect";
 import type { Generated } from "kysely";
 import { AddUser, User } from "./schema";
 
-
 interface Database {
   users: Omit<typeof User.Type, "id"> & { id: Generated<number> };
 }
 
 class SqliteDB extends Context.Tag("SqliteDB")<SqliteDB, SqliteKysely.EffectKysely<Database>>() {}
-
 const SqliteLive = Sqlite.SqliteClient.layer({ dbName: "mydb", mode: "opfs", openMode: "c" });
-
 const KyselyLive = Layer.effect(SqliteDB, SqliteKysely.make<Database>()).pipe(Layer.provide(SqliteLive));
-
-interface Name {
-  readonly _: unique symbol;
-}
-
-export const Name = Context.GenericTag<Name, string>("Name");
 
 const WorkerLive = Runner.layerSerialized(AddUser, {
   AddUser: (req) => Effect.gen(function* () {
