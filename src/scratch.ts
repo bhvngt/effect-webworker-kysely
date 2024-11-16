@@ -31,17 +31,7 @@ Effect.gen(function* () {
   const result = yield* db.withTransaction(
     Effect.gen(function* () {
       const inserted = yield* db.insertInto("users").values({ name: `Alice` }).returningAll();
-
-      // console.log(inserted instanceof globalThis.Proxy);
-      // yield* Console.log(inserted[0])
-      // console.log(`inserted`, JSON.stringify(inserted[0]));
-      // console.log(`inserted[0]`, Schema.decodeSync(User)(inserted[0]));
       return inserted[0];
-      // const selected = yield* db.selectFrom("users").selectAll();
-      // yield* Console.table(selected);
-      // const updated = yield* db.updateTable("users").set({ name: "Bob" }).returningAll();
-      // yield* Console.table(updated);
-      // return yield* Effect.fail(new globalThis.Error("rollback"));
     }),
   ).pipe(Effect.exit)
   console.log(`result`, yield* result);
