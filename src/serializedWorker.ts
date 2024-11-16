@@ -4,7 +4,7 @@ import * as SqliteKysely from "@effect/sql-kysely/Sqlite";
 import * as Sqlite from "@effect/sql-sqlite-wasm";
 import { Console, Context, Effect, Layer } from "effect";
 import type { Generated } from "kysely";
-import { GetUserById, User } from "./schema";
+import { AddUser, User } from "./schema";
 
 
 interface Database {
@@ -23,8 +23,8 @@ interface Name {
 
 export const Name = Context.GenericTag<Name, string>("Name");
 
-const WorkerLive = Runner.layerSerialized(GetUserById, {
-  GetUserById: (req) => Effect.gen(function* () {
+const WorkerLive = Runner.layerSerialized(AddUser, {
+  AddUser: (req) => Effect.gen(function* () {
     yield* Effect.log("Loading and initializing SQLite3 module...");
     const db = yield* SqliteDB;
     yield* db.schema

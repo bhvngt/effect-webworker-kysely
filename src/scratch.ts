@@ -1,4 +1,3 @@
-import * as BrowserRunner from "@effect/platform-browser/BrowserWorkerRunner";
 import * as SqliteKysely from "@effect/sql-kysely/Sqlite";
 import * as Sqlite from "@effect/sql-sqlite-node"
 import { Context, Effect, Layer } from "effect";
